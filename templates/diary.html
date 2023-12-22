@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+    
+{% block title %} 
+Your Adventures - Travel Diary 
+{% endblock %}
+
+{% block body %}
+<section class="container">
+    <h1>Your Adventures</h1>
+    <p>Here are all the adventures you've recorded:</p>
+
+    <!-- Adventures List -->
+    <div class="adventures-list">
+        
+        {% for a in adventures %}
+            <div class="adventure-item">
+                <a href="view-entry?id={{ a.id }}">
+                <h3>{{ a.title }}</h3>
+                </a>
+                <p>{{ a.date }}</p>
+                <p>Country: {{ a.destination_country }}</p>
+                <p>Country: {{ a.destination_city }}</p>
+            </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+    
+{% block title %}
+Add New Adventure - Travel Diary
+{% endblock %}
+
+{% block head %}
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/image@latest" defer></script>
+    <script src="{{ url_for('static', filename='editor.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='submit_new_entry.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='display_flag.js') }}" defer></script>
+
+{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        <h1>Add New Adventure</h1>
+        <p>Record your travel experience.</p>
+
+        <form action="/save-entry" method="post" id="new_entry">
+            <label for="title">Title</label><br>
+            <input type="text" id="title" name="title" required><br>
+
+            <label for="country">Country</label><br>
+            <span id="countryFlag"></span>
+            <input type="text" id="country" name="country" required><br>
+
+            <label for="city">City</label><br>
+            <input type="text" id="city" name="city" required><br>
+
+            <label for="date">Date</label><br>
+            <input type="date" id="date" name="date" required><br>
+
+            <label for="description">Experience</label><br>
+            <div id="editorjs"></div>
+
+            <input type="text" id="editor_data" name="editor_data" style="display: none">
+
+            <input type="submit" value="Submit Adventure">
+        </form>
+    </section>
+
+{%  endblock %}

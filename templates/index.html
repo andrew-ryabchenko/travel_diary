@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+Travel Diary
+{% endblock %}
+
+{% block body %}
+
+<section class="container">
+    <h1>Welcome to Your Travel Diary</h1>
+    <p>Here you can record and revisit all your amazing travel experiences.</p>
+
+    <div class="dashboard">
+        <div class="dashboard-item">
+            <h2>Add New Entry</h2>
+            <p>Document a new journey.</p>
+            <a href="/add-entry" class="button">Add Entry</a>
+        </div>
+
+        <div class="dashboard-item">
+            <h2>View Diary</h2>
+            <p>Revisit your past adventures.</p>
+            <a href="/view-diary" class="button">View Entries</a>
+        </div>
+    </div>
+
+    <!-- User's Past Adventures -->
+    <h2>Your Past Adventures</h2>
+    <div>
+        <table class="styled-table">
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Country
+                </th>
+                <th>
+                    City
+                </th>
+            </tr>
+            {% for a in adventures %}
+            <tr>
+                <td><a href="/view-entry?id={{a.id}}">{{a.title}}</a></td>
+                <td>{{a.date}}</td>
+                <td>{{a.destination_country}}</td>
+                <td>{{a.destination_city}}</td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+
+</section>
+
+{% endblock %}

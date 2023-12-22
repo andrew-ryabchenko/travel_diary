@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+    
+{% block title %}
+{{ adventure.title }} - Travel Diary
+{% endblock %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+{% endblock %}
+
+{% block body%}
+
+<section class="container">
+    <!-- Adventures List -->
+    <div class="adventures-list">
+        
+        <div class="adventure-item">
+            <h3>{{ adventure.title }}</h3>
+            <p>{{ adventure.date }}</p>
+            <p>Country: {{ adventure.destination_country }}</p>
+            <p>City: {{ adventure.destination_city }}</p>
+            <div id="editorjs"></div>
+        </div>
+
+    </div>
+</section>
+<script>
+    const editor = new EditorJS({
+        holder: 'editorjs',
+        readOnly: true,
+        data: JSON.parse({{ adventure.experience | tojson | safe }}),
+        tools: {
+            image: {
+                class: SimpleImage
+            },
+            header: {
+                class: Header,
+                config: {
+                placeholder: 'Enter a header',
+                levels: [1, 2, 3, 4],
+                defaultLevel: 2
+                }
+            },
+            list: {
+                class: List,
+                inlineToolbar: true,
+                config: {
+                defaultStyle: 'unordered'
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

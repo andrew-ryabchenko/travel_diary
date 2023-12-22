@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Profile - Travel Diary
+{% endblock %}
+
+{% block body %}
+
+<section class="container">
+    <h1>Profile</h1>
+
+    <!-- User Information -->
+    <div class="user-info">
+        <h2>Account Information</h2>
+        <p>{{ username }}</p>
+        <p>Recorded 
+            <a href="/view-diary">{{ num_entries }}</a> adventures</p>
+    </div>
+
+    <!-- Password Change Form -->
+    <div class="password-change">
+        <h2>Change Password</h2>
+        <form action="/change-password" method="post">
+            <label for="current_password">Current Password:</label><br>
+            <input type="password" id="current_password" name="current_password" required><br>
+
+            <label for="new_password">New Password:</label><br>
+            <input type="password" id="new_password" name="new_password" required><br>
+
+            <label for="confirm_new_password">Confirm New Password:</label><br>
+            <input type="password" id="confirm_new_password" name="confirm_new_password" required><br>
+
+            <input type="submit" value="Change Password">
+        </form>
+    </div>
+</section>
+
+{% if password_updated %}
+<script>alert("Password updated")</script>
+{% endif %}
+
+{% if password_update_failed %}
+<script>alert("Password update failed. Check credentials.")</script>
+{% endif %}
+
+{% if passwords_do_not_match %}
+<script>alert("Passwords do not match.")</script>
+{% endif %}
+
+{% if passwd_complexity_check_failed %}
+<script>
+    alert(
+`Password should be least 12 characters in length, 
+and include at least 1 uppercase character, 
+1 lowercase character, 1 number and 
+1 special character (! " # $ % ~ ' ( ) * . + -).`
+        )
+</script>
+{% endif %}
+
+{% if common_password_used %}
+<script>
+    alert(
+`Using common insecure password. Choose stronger password.`
+        )
+</script>
+{% endif %}
+
+{% endblock %}
